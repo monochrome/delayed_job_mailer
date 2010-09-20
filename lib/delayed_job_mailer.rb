@@ -18,6 +18,8 @@ module Delayed
             case method_symbol.id2name
             when /^deliver_([_a-z]\w*)\!/ then orig_method_missing(method_symbol, *params)
             when /^deliver_([_a-z]\w*)/ then self.send_later("#{method_symbol}!", *params)
+            when /^send_([_a-z]\w*)\!/ then orig_method_missing(method_symbol, *params)
+            when /^send_([_a-z]\w*)/ then self.send_later("#{method_symbol}!", *params)
             else orig_method_missing(method_symbol, *params)
             end
           end
